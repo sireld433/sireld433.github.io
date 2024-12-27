@@ -87,7 +87,7 @@
 
         <h4 style="text-align: center;">
             \[
-            \frac{(m+n)!}{m!n!} - \frac{(m+n-1)!}{m!(n-1)!} = \frac{n-m+1}{n+1}  \binom{m+n}{m}
+            \binom{m+n}{m}\ - \binom{m+n}{m-1} =\frac{(m+n)!}{m!n!} - \frac{(m+n-1)!}{m!(n-1)!} = \frac{n-m+1}{n+1}  \binom{m+n}{m}
             \]
         </h4>
 
@@ -109,10 +109,10 @@
         <p>(2 bài này khá tương tự với ví dụ trên)</p>
         <p>Bài toán 3: Đếm số cách chia đa giác lồi n+2 đỉnh thành các tam giác.</p>
 
-        <h2>Cài đặt Catalan c++</h2>
+        <h2>Cài đặt Catalan với C++</h2>
         <pre><code class="language-javascript"> 
-    const int MOD = ....
-    const int MAX = ....
+    const int MOD = 1e9 + 7
+    const int MAX = 1e5
     int catalan[MAX];
     void init() {
         catalan[0] = catalan[1] = 1;
@@ -126,7 +126,6 @@
             }
         }
     }
-
         </code></pre>
 
     </div>
