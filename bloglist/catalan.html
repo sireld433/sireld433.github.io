@@ -111,41 +111,21 @@
 
         <h2>Cài đặt Catalan c++</h2>
         <pre><code class="language-javascript"> 
-long long modular_exponentiation(long long A, long long B, long long M)
-{
-    if (B == 0)
-        return 1LL;
-
-    long long half = modular_exponentiation(A, B / 2LL, M) % M;
-
-    if (B & 1)
-        return (((half * half) % M) * (A % M)) % M;
-    else
-        return (half * half) % M;
-}
-
-long long inverse_modulo(long long A, long long M)
-{
-    return modular_exponentiation(A, M - 2, M);
-}
-
-long long catalan_N(long long N, long long M)
-{
-    long long x = 1, y = 1;
-    for (int i = N + 2; i <= 2 * N; ++i)
-        x = (x * i) % M;
-    for (int i = 1; i <= N; ++i)
-        y = (y * i) % M;
-    y = inverse_modulo(y, M);
-
-    return (x * y) % M;
-}
-    
-int main()
-{
-    long long M = 1e9 + 7;
-    cout << catalan_N(N, M);
-}
+    const int MOD = ....
+    const int MAX = ....
+    int catalan[MAX];
+    void init() {
+        catalan[0] = catalan[1] = 1;
+        for (int i=2; i<=n; i++) {
+            catalan[i] = 0;
+            for (int j=0; j < i; j++) {
+                catalan[i] += (catalan[j] * catalan[i-j-1]) % MOD;
+                if (catalan[i] >= MOD) {
+                    catalan[i] -= MOD;
+                }
+            }
+        }
+    }
 
         </code></pre>
 
