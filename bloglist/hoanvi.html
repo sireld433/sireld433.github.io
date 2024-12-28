@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+    <title> hoanvi </title>
+    <link rel="icon" type="image/favicon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism-tomorrow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+
+    <div id="character-images" class="character-row"> </div>
+
+<div id="content">
+
+    <div id="left" class="boxleft">
+        <nav id="left-inner" class = "inner">
+            <a href = "/index.html">
+                <img id = "logo" src="">
+            </a>
+            <br>
+            <ul class="blog-list">
+                <li> <a href = "/index.html" class="btn-light"> Site</a></li>
+                <li> <a href = "/me.html" class="btn-light"> Me</a></li>
+            </ul>
+            <hr>
+            <ul class="blog-list">
+                <li> <a href = "/contact.html" class="btn-light"> Contact</a></li>
+                <li> <a href = "/blog.html" class="btn-light"> Blog </a></li>
+                <li> <a href = "/test.html" class="btn-light"> Test</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id = "right" class = "boxright">
+
+        <h1>Tìm hoán vị thứ k của một mảng cho trước với điều kiện p</h1>
+
+        <hr>
+
+        <h4>Bài toán như sau:</h4>
+
+        <p>Xét một hoán vị của các số nguyên từ 1 đến n. Ta định nghĩa một S(p) như sau:</p>
+
+        <p style="text-align: center;">
+            \( S(p) = \sum_{1 \leq l \leq r \leq n} \min(p_l, p_{l+1}, \dots, p_r) \)
+        </p>
+
+        <p>Xét tất cả các hoán vị có độ dài n với giá trị S(p) lớn nhất. 
+           In ra hoán vị thứ k theo thứ tự từ điển, nếu không có thì in ra -1.</p>
+
+        <p>Ví dụ với hoán vị [1,2,3], giá trị  S(p) là: min(1) + min(1,2) + 
+            min(1,2,3) + min(2) + min(2,3) + min(3) = 1 + 1 + 1 + 2 + 2 + 3 = 10.</p>
+
+        <h4>Cách giải của mình cho bài toán này:</h4>
+
+        <p>Một hoán vị từ 1 đến n sẽ lấy tổng của \( n \cdot \frac{n+1}{2} \) phần 
+            tử bé nhất, vì vậy nên ta sẽ đếm số lượng phần tử có thể xuất hiện sao
+            cho tổng đạt được là lớn nhất.
+        </p>
+
+        <p>Dễ thấy cho dù số n được đặt ở đâu đi nữa, thì nó chỉ xuất hiện đúng 1 lần,
+            vì thế ta có thể bỏ qua và không xét số n, và số 1 dù có đặt ở đâu đi chăng 
+            nữa, nó cũng xuất hiện ít nhất n lần. 
+        </p>
+
+        <p>Một ý tưởng đơn giản là cho các phần tử bé xuất hiện với số lần ít nhất nó có thể
+            xuất hiện, khi đó số 1 sẽ xuất hiện n lần, số 2 xuất hiện n-1 lần,.. số i sẽ xuất
+            hiện n-i+1 lần. Khi đó tổng sẽ đạt lớn nhất.
+        </p>
+
+        <p>Với việc số i xuất hiện n-i+1 lần, giả sử như số i không xuất hiện n-i+1 lần, mà nó
+            xuất hiện k lần thì sẽ như sau:
+        </p>
+
+        <p>
+            1. \( k < n - i + 1 \) | \( \exists j < i \),  \( \text{freq}[j] > n - j + 1 \)
+        </p>
+
+        <p>
+            2. \( k > n - i + 1 \) | \( \exists j > i \),  \( \text{freq}[j] < n - j + 1 \)
+        </p>
+        
+        <p>
+            (mình chưa chứng minh được bằng toán học phần này, hjhj, nhưng nó thực sự rất dễ để nhìn ra)
+        </p>
+
+        <p>Qua đó, chúng ta sẽ sử dụng thuật toán tham lam để giải bài toán trên, đặt phần tử bé nhất ở vị
+            trí đầu hoặc cuối, khi đó sẽ tạo nên một dãy mới với n-2 phần tử còn lại, qua đó mỗi phần tử từ
+            1 đến n-1 sẽ có 2 cách chọn, vậy số hoán vị đạt được S(p) max là \( 2^{n-1} \).
+        </p>
+        
+        <h4>Thuật toán để tìm hoán vị thứ k</h4>
+
+        <p>Ta sẽ gán nhãn nhị phân cho từng phần tử từ 1 đến n-1, nhãn bằng 0 là không đổi vị trí (tức là xếp 
+            ở đầu tiên), nhãn bằng 1 là đổi vị trí. Vì số phần tử được xếp từ 1 đến n, bỏ qua số 0 nên ta sẽ 
+            giảm k đi 1 đơn vị (bỏ qua \( 2^{0} \)).
+        </p>
+
+        <p>Ta sẽ tạo ra được 2 mảng động chứ các phần tử có nhãn bằng 0 và các phần tử có nhãn bằng 1, khi đó phần tử
+            có nhãn bằng 1 sẽ được xếp từ dưới lên, nên khi xét theo tứ tự thì phải reverse lại mảng để in ra, khi đó 
+            chúng ta in ra mảng nhãn 0 và mảng nhãn 1 (sau khi reverse) là được đáp án cần tìm.
+        </p>
+
+        <h4>Nguồn của bài toán trên: <a href="https://codeforces.com/contest/2040/problem/C">Codeforces - C. Ordered Permutations</a></h4>
+
+    </div>
+</div>
+
+    <script src="main.js"></script>
+
+</body>
