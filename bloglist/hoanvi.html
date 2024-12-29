@@ -46,7 +46,7 @@
 
         <h4>Bài toán như sau:</h4>
 
-        <p>Xét một hoán vị của các số nguyên từ 1 đến n. Ta định nghĩa một S(p) như sau:</p>
+        <p>Xét một hoán vị của các số nguyên từ 1 đến n. Ta định nghĩa một tổng S(p) như sau:</p>
 
         <p style="text-align: center;">
             \( S(p) = \sum_{1 \leq l \leq r \leq n} \min(p_l, p_{l+1}, \dots, p_r) \)
@@ -58,7 +58,7 @@
         <p>Ví dụ với hoán vị [1,2,3], giá trị  S(p) là: min(1) + min(1,2) + 
             min(1,2,3) + min(2) + min(2,3) + min(3) = 1 + 1 + 1 + 2 + 2 + 3 = 10.</p>
 
-        <h4>Cách giải của mình cho bài toán này:</h4>
+        <h4>Cách giải của mình cho bài toán này</h4>
 
         <p>Một hoán vị từ 1 đến n sẽ lấy tổng của \( n \cdot \frac{n+1}{2} \) phần 
             tử bé nhất, vì vậy nên ta sẽ đếm số lượng phần tử có thể xuất hiện sao
@@ -80,15 +80,15 @@
         </p>
 
         <p>
-            1. \( k < n - i + 1 \) | \( \exists j < i \),  \( \text{freq}[j] > n - j + 1 \)
+            1. \( k < n - i + 1 \) | \( \exists j < i \),  \( \text{freq}[j] > n - j + 1 \), \( \forall i, j \;|\; 1 \leq j < i < n \)
         </p>
 
         <p>
-            2. \( k > n - i + 1 \) | \( \exists j > i \),  \( \text{freq}[j] < n - j + 1 \)
+            2. \( k > n - i + 1 \) | \( \exists j > i \),  \( \text{freq}[j] < n - j + 1 \), \( \forall i, j \;|\; 1 \leq i < j < n \)
         </p>
         
         <p>
-            (mình chưa chứng minh được bằng toán học phần này, hjhj, nhưng nó thực sự rất dễ để nhìn ra)
+            (vì mình khá ngu toán nên chưa chứng minh được bằng toán học phần này, hjhj, nhưng nó thực sự rất dễ để nhìn ra)
         </p>
 
         <p>Qua đó, chúng ta sẽ sử dụng thuật toán tham lam để giải bài toán trên, đặt phần tử bé nhất ở vị
@@ -97,6 +97,8 @@
         </p>
         
         <h4>Thuật toán để tìm hoán vị thứ k</h4>
+
+        <p>Nếu k > \( 2^{n-1} \) thì in ra -1. Ngược lại thì như sau:</p>
 
         <p>Ta sẽ gán nhãn nhị phân cho từng phần tử từ 1 đến n-1, nhãn bằng 0 là không đổi vị trí (tức là xếp 
             ở đầu tiên), nhãn bằng 1 là đổi vị trí. Vì số phần tử được xếp từ 1 đến n, bỏ qua số 0 nên ta sẽ 
