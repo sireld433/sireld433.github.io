@@ -101,32 +101,6 @@
 
         <p>Đây được gọi là số Catalan.</p>
 
-        <h3>Một vài bài toán áp dụng số Catalan </h3>
-
-        <p>Bài toán 1: Đếm số cách đặt n cặp ngoặc đóng mở sao cho hợp lệ.</p>
-        <p>Bài toán 2: Đếm số cây nhị phân khác nhau có đúng n+1 nút lá.</p>
-        <p>(2 bài này khá tương tự với ví dụ trên)</p>
-        <p>Bài toán 3: Đếm số cách chia đa giác lồi n+2 đỉnh thành các tam giác.</p>
-
-        <h2>Cài đặt Catalan với C++</h2>
-        <pre><code class="language-javascript"> 
-    const int MOD = 1e9 + 7
-    const int MAX = 1e5
-    int catalan[MAX];
-    void init() {
-        catalan[0] = catalan[1] = 1;
-        for (int i=2; i<=n; i++) {
-            catalan[i] = 0;
-            for (int j=0; j < i; j++) {
-                catalan[i] += (catalan[j] * catalan[i-j-1]) % MOD;
-                if (catalan[i] >= MOD) {
-                    catalan[i] -= MOD;
-                }
-            }
-        }
-    }
-        </code></pre>
-
     </div>
     </div>
 </div>
