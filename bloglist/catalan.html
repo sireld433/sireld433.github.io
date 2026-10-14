@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
     <title> catalan </title>
-    <link rel="icon" type="image/favicon" href="/image/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
     <link rel="stylesheet" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism-tomorrow.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.js"></script>
@@ -22,7 +22,7 @@
     <div id="left" class="boxleft">
         <nav id="left-inner" class = "inner">
             <a href = "/index.html">
-                <img id = "logo" src="">
+                <img id = "logo" src="/image/logo2.jpg" alt="logo">
             </a>
             <br>
             <ul class="blog-list">
@@ -31,18 +31,20 @@
             </ul>
             <hr>
             <ul class="blog-list">
-                <li> <a href = "/contact.html" class="btn-light"> Contact</a></li>
+                <li> <a href = "/info.html" class="btn-light"> Info</a></li>
                 <li> <a href = "/blog.html" class="btn-light"> Blog </a></li>
-                <li> <a href = "/test.html" class="btn-light"> Test</a></li>
+                <li> <a href = "/demo.html" class="btn-light"> Demo</a></li>
             </ul>
         </nav>
     </div>
 
     <div id = "right" class = "boxright">
 
-        <h1> Catalan number </h1>
+        <h1> Số Catalan </h1>
 
         <hr>
+
+        <h2>Chứng minh số 1, sử dụng hình không gian</h2>
 
         <h4>Giới thiệu về bài toán</h4>
 
@@ -101,11 +103,26 @@
 
         <p>Đây được gọi là số Catalan.</p>
 
+        <h2>Chứng minh số 2, sử dụng hàm sinh</h2>
+
+        <h4>Giới thiệu về bài toán</h4>
+
+        <p>Cho một ma trận \(A \) được tạo thành bởi tích của các ma trận \( A_0, A_1, A_2, A_3 \), 
+            vì ma trận có tính chất kết hợp nên có rất nhiều cách để thực hiện, hãy đếm số cách tính
+            A.
+        </p>
+
+        <p>Ví dụ:         \[
+            A = A_0(A_1(A_2A_3)) = A_0((A_1A_2)A_3) = (A_0A_1)(A_2A_3) =...
+            \]</p>
+
+        <p>Chưa viết xong...</p>
+
     </div>
     </div>
 </div>
 
-<!-- <script src="/main.js"></script> -->
+<script src="/main.js"></script>
 
 </body>
-
+</html>

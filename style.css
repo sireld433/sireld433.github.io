@@ -17,7 +17,6 @@ body {
 }
 
 #content {
-  width: var(--width);
   display: flex;
   flex-direction: row;
   justify-content: space-between; 
@@ -46,10 +45,28 @@ body {
   text-align: center;
 } 
 
-#so {
+/* #so {
   display: flex;             
   justify-content: center;    
   align-items: center;      
+} */
+
+#so {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  overflow-x: auto;
+}
+
+#so pre {
+  display: inline-block;
+  width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: left;
+  white-space: pre;
 }
 
 .blog-list {
@@ -70,23 +87,54 @@ body {
 .character-row {
   position: absolute; 
   top: 10px; 
-  right: 10px;
-  display: flex;
   right: 300px;  
+  display: flex;
 }
 
 .character-row img {
   margin: 5px; 
-  width: 200px;
-  height: 200px; 
+  width: 50px;
+  height: 50px; 
 }
 
 .inner {
-	border: 1px solid var(--bblack);
-	margin: 15px 7px;
-	padding: 15px 20px;
-	color: var(--black);
+	margin: 10px 0px;
+	padding: 10px 0px;
 	box-sizing: border-box;
+}
+
+#logo {
+  display: block;      
+  width: 100%;
+  max-width: 110px;        
+  height: auto;           
+  margin: 0 auto;           
+  border-radius: 8px;        
+  filter: brightness(1.124); 
+  transition: transform 0.3s ease;
+}
+
+#logo:hover {
+  transform: scale(1.05);
+}
+
+.boxright img {
+  max-width: 100%;
+  height: auto;
+}
+
+.boxright {
+  overflow-wrap: anywhere;
+}
+
+#so {
+  overflow-x: auto;
+}
+
+mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .btn-blue{
@@ -109,7 +157,21 @@ body {
   font-weight: bold; 
   font-size: 1.1em; 
   color:darkblue; 
-} 
+}
+
+
+.btn-dark {
+  color: #000;
+  text-decoration: none;
+  font-weight: normal;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #000;
+}
 
 .btn-blog{
   color: #0056b3;
@@ -127,4 +189,46 @@ body {
 .blog-list li strong {
   font-size: 16px;
   color: #0056b3;
+}
+
+/* ---------- Màn hình nhỏ (điện thoại, cửa sổ hẹp) ---------- */
+@media (max-width: 1060px) {
+  #content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .character-row {
+    position: static;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .boxleft,
+  .boxright {
+    box-sizing: border-box;
+    width: calc(100% - 24px);
+    max-width: 700px;
+    margin: 12px 12px 0 12px;
+    padding: 20px;
+  }
+
+  #left-inner ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 20px;
+    margin: 0;
+  }
+
+  #left-inner ul li {
+    margin-bottom: 0;
+  }
+
+  #left-inner {
+    margin: 0;
+    padding: 0;
+  }
 }
