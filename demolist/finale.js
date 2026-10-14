@@ -26,11 +26,15 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
 
   const flames = [...document.querySelectorAll('.flame')];
   const CANDLE = [[119, 58], [139, 53], [159, 51], [179, 58]];
-  const NEED = 0.5;                   
 
-  let mode = 'idle', out = 0, acc = 0, level = 0, base = 0.1, thr = 0.3;
-  let actx = null, analyser = null, buf = null, stream = null, bins = 32;
-  let press = false, calibrating = false, calibStart = 0, calibSum = 0, calibN = 0, last = 0;
+  // ⚙️ CHỈNH ĐỘ NHẠY Ở ĐÂY
+  const NEED = 0.3;          // số giây thổi liên tục để tắt 1 nến (nhỏ hơn = dễ hơn)
+  const MARGIN_START = 5;    // dB: tiếng phải lớn hơn tiếng ồn nền bấy nhiêu mới tính là thổi
+  const MARGIN_MIN = 2.5;    // dB: độ nhạy tự tăng dần về mức này nếu thổi mãi chưa tắt
+
+  let mode = 'idle', out = 0, acc = 0, db = -90, baseDb = -70, margin = MARGIN_START, last = 0;
+  let actx = null, analyser = null, tbuf = null, stream = null;
+  let press = false, calibrating = false, calibStart = 0, samples = [], readyAt = 0, warned = false;
 
   const setHint = (html) => { hint.innerHTML = html; hint.classList.add('show'); };
   const FALLBACK = '<small>hoặc giữ ngón tay / chuột vào chiếc bánh để thổi 💨</small>';
@@ -45,10 +49,8 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
     if (actx.state === 'suspended') await actx.resume();
     analyser = actx.createAnalyser();
     analyser.fftSize = 1024;
-    analyser.smoothingTimeConstant = 0.4;
     actx.createMediaStreamSource(stream).connect(analyser);
-    buf = new Uint8Array(analyser.frequencyBinCount);
-    bins = Math.max(8, Math.floor(1500 / (actx.sampleRate / analyser.fftSize)));   // dải 0–1500Hz
+    tbuf = new Float32Array(analyser.fftSize);
   }
 
   async function begin() {
@@ -63,9 +65,9 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
 
     meter.classList.add('show');
     if (micOk) {
-      calibrating = true; calibStart = performance.now();
+      calibrating = true; calibStart = performance.now(); samples = [];
       setHint('Nhắm mắt lại, ước một điều… 💭');
-      setTimeout(() => { if (mode === 'ready') setHint('Giờ thì thổi nến nào! 🕯️💨' + FALLBACK); }, 1100);
+      setTimeout(() => { if (mode === 'ready') setHint('Giờ thì thổi nến nào! 🕯️💨<small>thổi gần micro, một hơi đều là được</small>'); }, 1100);
     } else {
       setHint('Không dùng được micro, nhưng không sao 🥹' + FALLBACK.replace('hoặc giữ', 'hãy giữ'));
     }
@@ -90,28 +92,38 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
     if (mode !== 'ready') return;
     const dt = Math.min(0.05, (t - last) / 1000 || 0.016); last = t;
 
-    let raw = 0;
+    // Đo âm lượng (dB) từ sóng âm; hơi thổi làm âm lượng tăng vọt so với tiếng ồn nền
     if (analyser) {
-      analyser.getByteFrequencyData(buf);
-      let s = 0; for (let i = 0; i < bins; i++) s += buf[i];
-      raw = s / bins / 255;
+      analyser.getFloatTimeDomainData(tbuf);
+      let s = 0; for (let i = 0; i < tbuf.length; i++) s += tbuf[i] * tbuf[i];
+      const cur = 20 * Math.log10(Math.sqrt(s / tbuf.length) + 1e-7);
+      db = db * 0.6 + cur * 0.4;
       if (calibrating) {                                   // đo tiếng ồn nền ~1 giây đầu
-        calibSum += raw; calibN++;
+        samples.push(cur);
         if (t - calibStart > 1000) {
-          base = calibSum / Math.max(1, calibN);
-          thr = Math.min(0.9, base + 0.2);
-          calibrating = false;
+          samples.sort((a, b) => a - b);
+          const low = samples.slice(0, Math.max(1, Math.floor(samples.length * 0.6)));
+          baseDb = Math.max(-80, low.reduce((a, b) => a + b, 0) / low.length);
+          calibrating = false; readyAt = t;
         }
       }
     }
-    if (press) raw = Math.max(raw, thr + 0.3);             // giữ vào bánh = thổi
-    level = level * 0.7 + raw * 0.3;
 
-    const blowing = !calibrating && level > thr;
-    const strength = blowing ? Math.min(1, 0.5 + (level - thr) / 0.25)
-                             : Math.min(0.3, Math.max(0, (level - base) / Math.max(0.05, thr - base)) * 0.3);
+    // Độ nhạy tự tăng dần nếu thổi lâu mà chưa tắt nến nào
+    const elapsed = calibrating || !readyAt ? 0 : (t - readyAt) / 1000;
+    margin = Math.max(MARGIN_MIN, MARGIN_START - elapsed * 0.4);
+    if (!warned && elapsed > 6 && out === 0 && !press) {
+      warned = true;
+      setHint('Thổi sát micro hơn, một hơi dài và đều nhé 💨' + FALLBACK);
+    }
 
-    fill.style.width = Math.min(100, (level / (thr + 0.25)) * 100) + '%';
+    let up = calibrating || !analyser ? 0 : db - baseDb;   // tăng bao nhiêu dB so với nền
+    if (press) up = Math.max(up, margin + 12);             // giữ vào bánh = thổi
+    const blowing = !calibrating && up > margin;
+    const strength = blowing ? Math.min(1, 0.5 + (up - margin) / 15)
+                             : Math.min(0.3, Math.max(0, up / margin) * 0.3);
+
+    fill.style.width = Math.max(0, Math.min(100, (up / (margin + 12)) * 100)) + '%';
 
     svg.classList.toggle('blowing', strength > 0.02);
     flames.forEach((f, i) => {
@@ -120,7 +132,7 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
       f.style.transform = `skewX(${-(strength * 30 + wob)}deg) scaleY(${1 - strength * 0.4})`;
     });
 
-    acc = blowing ? acc + dt : Math.max(0, acc - dt * 0.8);
+    acc = blowing ? acc + dt : Math.max(0, acc - dt * 0.5);
     if (acc >= NEED && out < flames.length) { extinguish(out); out++; acc = 0; }
     if (out >= flames.length) return finish();
     requestAnimationFrame(loop);
