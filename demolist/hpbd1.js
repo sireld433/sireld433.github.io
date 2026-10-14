@@ -690,9 +690,7 @@ function handleWish() {
   }, 800);
 }
 
-if (wishBtn) {
-  wishBtn.addEventListener('click', handleWish);
-}
+// (Nút ước + thổi nến do finale.js xử lý)
 
 // ===== NÚT ĐÓNG THIỆP → CHUYỂN SANG BÁNH KEM =====
 const letterCloseBtn = document.getElementById('letterCloseBtn');
@@ -933,33 +931,8 @@ function goToAlbum() {
 // Nút "Tiếp tục" trong album
 if (albumContinueBtn) {
   albumContinueBtn.addEventListener('click', () => {
-    alert('Phần tiếp theo đang được chuẩn bị... 🎁');
+    if (window.startSkyFinale) window.startSkyFinale();
   });
 }
 
-// ===== GHI ĐÈ HANDLE WISH ĐỂ TỰ CHUYỂN SANG ALBUM =====
-window.handleWish = function() {
-  if (wishDone) return;
-  wishDone = true;
-
-  wishBtn.disabled = true;
-  wishBtn.textContent = 'Đã ước rồi 💖';
-
-  launchConfetti();
-
-  setTimeout(() => {
-    wishMessage.classList.add('show');
-  }, 800);
-
-  // ✅ Sau 3 giây → chuyển sang album
-  setTimeout(() => {
-    goToAlbum();
-  }, 3000);
-};
-
-// Gắn lại event cho wishBtn
-if (wishBtn) {
-  const newWishBtn = wishBtn.cloneNode(true);
-  wishBtn.parentNode.replaceChild(newWishBtn, wishBtn);
-  newWishBtn.addEventListener('click', window.handleWish);
-}
+// (Thổi nến & bầu trời sao: xem finale.js)

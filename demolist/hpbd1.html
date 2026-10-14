@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday 🎂</title>
 <link rel="stylesheet" href="style/hpbd1.css">
+<link rel="stylesheet" href="style/finale.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet"> -->
@@ -192,6 +193,10 @@
   <!-- Nút "Ước một điều" -->
   <button class="btn-wish" id="wishBtn">Ước một điều ước 🎂</button>
 
+  <!-- Gợi ý + thanh đo hơi thổi -->
+  <p class="blow-hint" id="blowHint"></p>
+  <div class="blow-meter" id="blowMeter"><i id="blowMeterFill"></i></div>
+
   <!-- Dòng chữ hiện sau khi bấm -->
   <p class="wish-message" id="wishMessage">Mong rằng điều ước của cậu sẽ thành hiện thực✨</p>
 
@@ -245,6 +250,22 @@
 
 </div>
 
+<!-- ===== MÀN HÌNH KẾT: BẦU TRỜI SAO ===== -->
+<div class="sky-screen" id="skyScreen">
+  <canvas id="skyCanvas"></canvas>
+  <div class="sky-moon"></div>
+  <p class="sky-hint" id="skyHint">Chạm vào những ngôi sao đang nhấp nháy ✨</p>
+  <div class="sky-message" id="skyMessage"></div>
+  <div class="sky-counter" id="skyCounter">0 / 9</div>
+  <div class="sky-final" id="skyFinal">
+    <div class="sky-sign" id="skySign"></div>
+    <h2 id="skyFinalTitle"></h2>
+    <p id="skyFinalText"></p>
+    <button class="sky-replay" id="skyReplayBtn">Xem lại từ đầu 🔁</button>
+  </div>
+</div>
+
 <script src="hpbd1.js"></script>
+<script src="finale.js"></script>
 </body>
 </html>

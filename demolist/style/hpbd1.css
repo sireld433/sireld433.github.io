@@ -11,7 +11,6 @@ body {
   position: relative;
 }
 
-/* ===== POPUP NHẬP TÊN ===== */
 .name-modal {
   position: fixed;
   inset: 0;
@@ -102,22 +101,8 @@ body {
 }
 .main-screen.show { opacity: 1; }
 
-
-/* .floating-chii {
-  position: absolute;
-  font-size: 28px;
-  user-select: none;
-  pointer-events: none;
-  opacity: 0.85;
-  animation: floatY 3s ease-in-out infinite;
-}
-
-} */
-
-/* ===== CHIIKAWA BAY XUNG QUANH ===== */
 .floating-chii {
   position: absolute;
-  /* width: 52px;  ← XÓA DÒNG NÀY */
   height: auto;
   user-select: none;
   pointer-events: none;
@@ -127,7 +112,7 @@ body {
   image-rendering: crisp-edges;
   animation: floatY 3s ease-in-out infinite;
   filter: drop-shadow(0 3px 6px rgba(255, 150, 200, 0.25));
-  object-fit: contain;   /* ← Thêm dòng này để ảnh không bị méo */
+  object-fit: contain;   
 }
 
 @keyframes floatY {
