@@ -1,9 +1,8 @@
 // ⚠️ NGÀY SINH NGƯỜI ĐƯỢC CHÚC → tự chọn chòm sao theo cung hoàng đạo
-const SKY_BIRTH = { day: 8, month: 5 };
+const SKY_BIRTH = { day: 25, month: 10};
 // 'libra','scorpio','sagittarius','capricorn','aquarius','pisces'. Để '' = tự đoán theo ngày sinh.
 const SKY_SIGN = '';
 
-// g = biết ơn (hồng) · m = kỷ niệm riêng (vàng) · f = mong ước tương lai (xanh)
 const SKY_WISHES = [
   { c: 'g', t: 'Cảm ơn cậu vì đã luôn lắng nghe và giúp đỡ mình' },
   { c: 'g', t: 'Cảm ơn vì đã đồng hành với mình' },

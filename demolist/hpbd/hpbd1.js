@@ -733,6 +733,7 @@ const ALBUM_PHOTOS = [
   { src: 'img/linnea5.png', caption: 'Mãi là bạn thân' },
 ];
 
+
 const albumScreen = document.getElementById('albumScreen');
 const albumTrack = document.getElementById('albumTrack');
 const albumPrevBtn = document.getElementById('albumPrevBtn');
@@ -754,6 +755,49 @@ function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
+// ===== CO GIÃN KHUNG THEO TỈ LỆ ẢNH THẬT =====
+// Khung tối đa = --card-w x --card-h của stage (đã responsive sẵn trong CSS).
+// Ảnh ngang → khung rộng & thấp, ảnh dọc → khung cao & hẹp, ảnh vuông → ở giữa.
+const ALBUM_MIN_RATIO = 0.5;   // rộng/cao nhỏ nhất (ảnh dọc quá dài sẽ bị cắt nhẹ)
+const ALBUM_MAX_RATIO = 2.4;   // rộng/cao lớn nhất; ảnh vượt mức này được hiện NGUYÊN VẸN (letterbox) thay vì bị cắt
+
+function fitPolaroid(el, img) {
+  if (!albumStage || !img.naturalWidth) return;
+  const stageCS = getComputedStyle(albumStage);
+  const maxW = parseFloat(stageCS.getPropertyValue('--card-w')) || 320;
+  // chiều cao tối đa = min(--card-h, chiều cao stage thực tế) → không bao giờ tràn màn hình thấp
+  const maxH = Math.min(parseFloat(stageCS.getPropertyValue('--card-h')) || 380,
+                        albumStage.clientHeight - 8);
+
+  const cs = getComputedStyle(el);
+  const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+  const padY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+
+  const rawRatio = img.naturalWidth / img.naturalHeight;
+  const ratio = Math.max(ALBUM_MIN_RATIO, Math.min(ALBUM_MAX_RATIO, rawRatio));
+
+  // Ảnh quá dài/quá cao: giữ khung ở tỉ lệ giới hạn, nhưng hiện trọn ảnh (contain)
+  // trên nền là chính ảnh đó được làm mờ → không bị cắt mà vẫn đẹp.
+  const wrap = img.parentElement;
+  const extreme = rawRatio > ALBUM_MAX_RATIO || rawRatio < ALBUM_MIN_RATIO;
+  wrap.classList.toggle('letterbox', extreme);
+  if (extreme) wrap.style.setProperty('--bg', 'url("' + img.src + '")');
+
+  // vùng ảnh tối đa nằm trong khung tối đa
+  const boxW = maxW - padX;
+  const boxH = maxH - padY;
+  let w = boxW, h = w / ratio;
+  if (h > boxH) { h = boxH; w = h * ratio; }
+
+  el.style.setProperty('--pw', (w + padX) + 'px');
+  el.style.setProperty('--ph', (h + padY) + 'px');
+}
+
+function refitAllPolaroids() {
+  albumCards.forEach((c) => fitPolaroid(c.el, c.el.querySelector('.polaroid-img')));
+}
+window.addEventListener('resize', refitAllPolaroids);
+
 // ===== TẠO MỖI ẢNH = 1 THẺ RIÊNG (chỉ tạo 1 lần) =====
 function buildAlbum() {
   if (!albumTrack) return;
@@ -766,7 +810,10 @@ function buildAlbum() {
     el.innerHTML =
       '<div class="polaroid-img-wrap"><img class="polaroid-img" alt="" draggable="false" decoding="async"></div>' +
       '<div class="polaroid-caption"></div>';
-    el.querySelector('.polaroid-img').src = photo.src;
+    const imgEl = el.querySelector('.polaroid-img');
+    imgEl.addEventListener('load', () => fitPolaroid(el, imgEl));
+    imgEl.src = photo.src;
+    if (imgEl.complete && imgEl.naturalWidth) fitPolaroid(el, imgEl);
     el.querySelector('.polaroid-caption').textContent = photo.caption || '';
     albumTrack.appendChild(el);
     albumCards.push({ el, prev: null });
