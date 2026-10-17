@@ -1,4 +1,4 @@
-// ⚠️ NGÀY SINH NGƯỜI ĐƯỢC CHÚC → tự chọn chòm sao theo cung hoàng đạo
+// Ngày sinh do người dùng nhập ở màn hình đầu (hpbd1.js gán vào đây) → tự chọn chòm sao. Giá trị dưới là mặc định.
 const SKY_BIRTH = { day: 25, month: 10};
 // 'libra','scorpio','sagittarius','capricorn','aquarius','pisces'. Để '' = tự đoán theo ngày sinh.
 const SKY_SIGN = '';
@@ -170,31 +170,37 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
       [114,72,1],[172,122,1],[192,153,1],[193,172,0],[210,174,0],[197,190,1],[214,188,0],[175,181,0],
       [95,133,1],[247,214,2],[314,238,1],[325,263,1]],
       lines: [[0,1],[1,2],[2,3],[3,4],[4,6],[6,5],[5,3],[8,7],[7,5],[6,9],[9,10],[10,11]] },
-    gemini: { name: 'Gemini', stars: [[35,16],[56,20,2],[32,40],[54,42],[28,62],[60,62],[20,84],[72,84]],
-      lines: [[0,2],[2,4],[4,6],[1,3],[3,5],[5,7],[2,3],[4,5]] },
-    cancer: { name: 'Cancer', stars: [[50,46,2],[36,22],[68,26],[40,74],[70,80],[50,62],[26,50]],
-      lines: [[0,1],[0,2],[0,5],[5,3],[5,4],[0,6]] },
-    leo: { name: 'Leo', stars: [[22,76,2],[24,58],[32,42],[44,32],[54,38],[52,52],[72,46],[92,60],[74,62]],
-      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,5]] },
-    virgo: { name: 'Virgo', stars: [[30,82,2],[38,62],[48,50],[60,40],[78,32],[32,38],[68,58],[88,66]],
-      lines: [[0,1],[1,2],[2,3],[3,4],[2,5],[3,6],[6,7]] },
-    libra: { name: 'Libra', stars: [[50,18],[20,48],[78,42,2],[34,80],[70,76],[50,52]],
-      lines: [[0,1],[0,2],[1,5],[5,2],[1,3],[2,4]] },
-    sagittarius: { name: 'Sagittarius', stars: [[50,18],[34,36],[58,40,2],[40,64],[24,72],[66,66],[82,46],[12,50]],
-      lines: [[1,2],[2,5],[5,3],[3,1],[0,1],[0,2],[7,1],[7,3],[6,2],[6,5],[4,3]] },
-    capricorn: { name: 'Capricorn', stars: [[8,28],[26,44],[42,62],[58,72,2],[76,62],[90,38],[70,40],[44,36]],
-      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[4,6],[6,7],[7,1]] },
-    aquarius: { name: 'Aquarius', stars: [[8,34],[24,24],[40,36],[56,26,2],[72,38],[90,28],[14,70],[32,62],[48,74],[66,64],[86,76]],
-      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[6,7],[7,8],[8,9],[9,10],[3,8]] },
-    pisces: { name: 'Pisces', stars: [[10,26],[22,18],[34,26],[22,36],[38,52],[54,66,2],[68,54],[80,40],[92,30],[88,48]],
-      lines: [[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,7]] },
+    gemini: { name: 'Gemini', stars: [   // dựng lại theo ảnh mẫu
+      [37,73,1],[77,33,1],[197,139,2],[134,184,1],[199,245,1],[231,205,0],[249,179,1],[275,182,1]],
+      lines: [[0,1],[1,2],[2,6],[0,3],[3,4],[4,5],[5,6],[6,7]] },
+    cancer: { name: 'Cancer', stars: [   // dựng lại theo ảnh mẫu
+      [503,53,1],[470,124,1],[445,150,2],[432,156,0],[380,186,1],[457,271,1]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[2,5]] },
+    leo: { name: 'Leo', stars: [   // dựng lại theo ảnh mẫu
+      [576,367,2],[549,294,0],[485,267,1],[474,208,0],[538,133,1],[577,155,0],[287,328,1],[312,407,1],[183,463,1]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[2,6],[6,8],[8,7],[7,6],[7,0]] },
+    virgo: { name: 'Virgo', stars: [   // dựng lại theo ảnh mẫu
+      [490,117,1],[469,194,0],[440,221,1],[400,207,1],[360,168,1],[359,269,1],[311,285,0],[241,330,1],[416,321,2],[345,365,1],[322,344,0],[281,372,1]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[3,5],[2,8],[5,8],[5,6],[6,7],[8,9],[9,10],[10,11]] },
+    libra: { name: 'Libra', stars: [   // dựng lại theo ảnh mẫu
+      [158,38,1],[257,76,1],[270,188,1],[213,252,0],[205,259,0],[212,276,1],[138,119,2],[105,160,1],[77,142,1]],
+      lines: [[0,1],[1,2],[0,2],[2,3],[3,4],[4,5],[0,6],[6,7],[7,8]] },
+    sagittarius: { name: 'Sagittarius', stars: [   // dựng lại theo ảnh mẫu
+      [107,28,1],[100,47,1],[131,72,1],[155,70,0],[160,102,0],[162,111,1],[180,122,1],[131,124,1],[151,147,2],[219,142,1],[209,106,1],[240,72,1],[246,152,1],[209,178,1],[223,199,1],[48,193,1],[68,243,0],[114,229,0],[119,261,1]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[2,5],[5,6],[6,9],[5,7],[7,8],[7,15],[8,15],[9,10],[10,11],[11,12],[12,9],[9,13],[13,14],[14,12],[15,17],[17,18],[15,16],[16,18]] },
+    capricorn: { name: 'Capricorn', stars: [   // dựng lại theo ảnh mẫu
+      [230,88,0],[228,105,2],[47,161,1],[101,153,0],[140,146,1],[108,200,1],[192,217,1]],
+      lines: [[0,1],[1,4],[4,3],[3,2],[2,5],[5,6],[6,1]] },
+    aquarius: { name: 'Aquarius', stars: [   // dựng lại theo ảnh mẫu
+      [47,385,1],[73,402,1],[77,440,1],[62,458,0],[29,494,1],[130,369,1],[140,371,1],[148,380,0],[178,382,2],[155,432,1],[211,429,1],[277,470,1]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[8,9],[8,10],[10,11]] },
+    pisces: { name: 'Pisces', stars: [   // dựng lại theo ảnh mẫu
+      [48,37,1],[38,45,0],[31,54,1],[27,66,1],[43,62,1],[57,76,0],[72,78,1],[92,71,2],[105,58,1],[118,63,1],[114,76,1],[101,80,0]],
+      lines: [[0,1],[1,2],[2,3],[3,4],[4,0],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,7]] },
   };
   const STARTS = [['aquarius',120],['pisces',219],['aries',321],['taurus',420],['gemini',521],['cancer',621],
     ['leo',723],['virgo',823],['libra',923],['scorpio',1023],['sagittarius',1122],['capricorn',1222]];
-  const v = SKY_BIRTH.month * 100 + SKY_BIRTH.day;
-  let key = 'capricorn'; STARTS.forEach(([n, s]) => { if (v >= s) key = n; });
-  if (SKY_SIGN && ZODIAC[SKY_SIGN]) key = SKY_SIGN;
-  const Z = ZODIAC[key];
+  let Z, info, N, adj, near, xs, ys, minX, maxX, minY, maxY;
   const pad = (n) => String(n).padStart(2, '0');
 
   const $ = (id) => document.getElementById(id);
@@ -204,21 +210,28 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
   const hintEl = $('skyHint'), msgEl = $('skyMessage'), cntEl = $('skyCounter'), finalEl = $('skyFinal');
   const COLORS = { g: '#ffb6d5', m: '#ffe29a', f: '#a9d8ff', s: '#fff6d8' };
 
+
+
+  function setupSign() {
+  const v = SKY_BIRTH.month * 100 + SKY_BIRTH.day;
+  let key = 'capricorn'; STARTS.forEach(([n, s]) => { if (v >= s) key = n; });
+  if (SKY_SIGN && ZODIAC[SKY_SIGN]) key = SKY_SIGN;
+  Z = ZODIAC[key];
   // Gán lời chúc cho các sao chạm được (theo thứ tự), sao đặc biệt nhận SKY_SPECIAL
   let wi = 0;
-  const info = Z.stars.map((p) => {
+  info = Z.stars.map((p) => {
     const type = p[2] === undefined ? 1 : p[2];
     if (type === 0) return { type };
     if (type === 2) return { type, c: 's', t: SKY_SPECIAL };
     const w = SKY_WISHES[wi++ % SKY_WISHES.length];
     return { type, c: w.c, t: w.t };
   });
-  const N = info.filter((s) => s.type > 0).length;
+  N = info.filter((s) => s.type > 0).length;
 
   // Sao nhỏ sáng theo khi có sao chạm được nằm cách tối đa 2 nấc
-  const adj = Z.stars.map(() => []);
+  adj = Z.stars.map(() => []);
   Z.lines.forEach(([a, b]) => { adj[a].push(b); adj[b].push(a); });
-  const near = Z.stars.map((_, i) => {
+  near = Z.stars.map((_, i) => {
     if (info[i].type > 0) return [];
     const seen = new Set([i]); let fr = [i], res = [];
     for (let d = 0; d < 2; d++) {
@@ -229,8 +242,9 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
     return res;
   });
 
-  const xs = Z.stars.map((p) => p[0]), ys = Z.stars.map((p) => p[1]);
-  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+  xs = Z.stars.map((p) => p[0]), ys = Z.stars.map((p) => p[1]);
+  minX = Math.min(...xs); maxX = Math.max(...xs); minY = Math.min(...ys); maxY = Math.max(...ys);
+  }
 
   let W = 0, H = 0, dpr = 1, running = false, t0 = 0, HX = 0, HY = 0;
   let stars = [], bg = [], shooters = [], rings = [];
@@ -399,6 +413,7 @@ const SKY_CLOSING = 'Mong mọi điều tốt đẹp nhất sẽ đến với c�
 
   window.startSkyFinale = function () {
     if (running) return;
+    setupSign();
     layout();
     cntEl.textContent = '0 / ' + N;
     running = true; t0 = performance.now();

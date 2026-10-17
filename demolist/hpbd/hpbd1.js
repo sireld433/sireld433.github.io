@@ -83,6 +83,16 @@ function spawnFloatingChii() {
 }
 
 // ===== BẮT ĐẦU =====
+// Đọc ngày sinh dạng dd/mm hoặc dd/mm/yyyy → {day, month} hoặc null
+function parseBirth(str) {
+  const m = str.trim().match(/^(\d{1,2})\s*[\/\-.]\s*(\d{1,2})(?:\s*[\/\-.]\s*\d{2,4})?$/);
+  if (!m) return null;
+  const day = +m[1], month = +m[2];
+  const maxDay = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  if (!maxDay || day < 1 || day > maxDay) return null;
+  return { day, month };
+}
+
 function startBirthday() {
   const name = nameInput.value.trim();
   if (!name) {
@@ -91,6 +101,19 @@ function startBirthday() {
     nameInput.focus();
     return;
   }
+
+  const birthInput = document.getElementById('birthInput');
+  const birth = parseBirth(birthInput.value);
+  if (!birth) {
+    birthInput.classList.add('invalid');
+    birthInput.value = '';
+    birthInput.placeholder = 'Nhập dạng ngày/tháng, vd 25/10 🥺';
+    birthInput.focus();
+    return;
+  }
+  birthInput.classList.remove('invalid');
+  SKY_BIRTH.day = birth.day;      // dùng cho màn hình bầu trời sao (finale.js)
+  SKY_BIRTH.month = birth.month;
 
   displayName.textContent = name + '!';
   cardName.textContent = name;
@@ -198,6 +221,9 @@ function continueClick() {
 startBtn.addEventListener('click', startBirthday);
 
 nameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') document.getElementById('birthInput').focus();
+});
+document.getElementById('birthInput').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') startBirthday();
 });
 
