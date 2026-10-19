@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Chúc mừng 20/10 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="2010.css">
+</head>
+<body>
+<button id="mu" title="Bật/tắt nhạc">🎵</button>
+<audio id="au" src="music/CarelessWhisper.mp3" loop></audio>
+
+<!-- TRANG 1: giống trang đầu website sinh nhật (Chiikawa bay quanh) -->
+<section class="pg on" id="p1">
+  <img class="hero" src="img/momonga4b.png" alt="">
+  <div class="ttl">Chúc mừng ngày <span class="g">20/10</span></div>
+  <div class="sub">~ Ngày Phụ nữ Việt Nam ~</div>
+  <div class="card">
+    <p>🌷 Gửi <b class="to"></b>,</p>
+    <p class="s">Tớ có chuẩn bị vài điều nhỏ xíu cho cậu...</p>
+    <p class="pk">Cậu có muốn xem không?</p>
+  </div>
+  <button class="btn" data-go="2">Tiếp tục →</button>
+</section>
+
+<!-- TRANG 2: vườn hoa -->
+<section class="pg" id="p2">
+  <h2>Chạm vào từng bông hoa nhé 🌷</h2>
+  <div class="bub" id="bub">Mỗi bông hoa giấu một lời nhắn nhỏ đó 🌱</div>
+  <div class="garden" id="garden"></div>
+  <div class="cnt" id="cnt">0 / 5</div>
+  <button class="btn hide" id="b2" data-go="3">Tiếp tục →</button>
+  <img class="mini" src="img/chiikawa5.png" alt="">
+</section>
+
+<!-- TRANG 3: phong bì thư -->
+<section class="pg" id="p3">
+  <div class="env" id="env"><div class="flap"></div><i>💌</i></div>
+  <p class="hint" id="eh">Có một lá thư gửi cậu, chạm để mở 💌</p>
+  <div class="letter" id="lt"></div>
+  <button class="btn hide" id="b3" data-go="4">Tiếp tục →</button>
+</section>
+
+<!-- TRANG 4: thẻ cào -->
+<section class="pg" id="p4">
+  <h2>Món quà nhỏ dành cho cậu 🎁</h2>
+  <div class="sc">
+    <div class="prize"><em>🎟️</em><b id="pt"></b><span id="pd"></span></div>
+    <canvas id="cv" width="280" height="170"></canvas>
+  </div>
+  <p class="hint" id="sh">Dùng ngón tay cào lớp bạc nhé ✨</p>
+  <div class="fin" id="fin"><p id="fx"></p><button class="btn" id="rp">Xem lại từ đầu 🔁</button></div>
+</section>
+
+<script src="2010.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Mali','Comic Sans MS',sans-serif;min-height:100vh;overflow:hidden;color:#6b5b66;
+background:linear-gradient(135deg,#ffe0ec 0%,#fff5d6 35%,#d9f5ff 70%,#e6e0ff 100%)}
+.pg{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;
+opacity:0;visibility:hidden;transition:opacity .7s,visibility .7s;overflow:hidden;text-align:center}
+.pg.on{opacity:1;visibility:visible}
+.pg>*{position:relative;z-index:2}
+.fl{position:absolute!important;z-index:1!important;width:70px;pointer-events:none;image-rendering:crisp-edges;
+animation:fy 3s ease-in-out infinite;filter:drop-shadow(0 3px 6px rgba(255,150,200,.3))}
+@keyframes fy{50%{transform:translateY(-14px)}}
+.hero{width:130px;animation:bn 2s ease-in-out infinite;filter:drop-shadow(0 8px 12px rgba(255,150,200,.3));image-rendering:crisp-edges}
+@keyframes bn{50%{transform:translateY(-12px) scale(1.04)}}
+.ttl{margin-top:22px;font-size:22px;color:#8fb8e0}
+.g{background:linear-gradient(90deg,#ff8bbf,#b89bff,#7ec8ff);-webkit-background-clip:text;background-clip:text;
+-webkit-text-fill-color:transparent;font-weight:700;font-size:30px}
+.sub{margin-top:4px;font-size:13px;color:#ff9ec5;letter-spacing:1px}
+.card{margin-top:24px;background:#fff;border:2px solid #ffe0ec;border-radius:18px;padding:22px 24px;width:90%;max-width:380px;
+box-shadow:0 8px 30px rgba(255,180,210,.35);animation:up .8s ease .3s both}
+@keyframes up{from{opacity:0;transform:translateY(20px)}}
+.card p{font-size:15px;line-height:1.7}.card .s{font-size:14px;color:#a08e9a;margin-top:8px}.card .pk{color:#ff6fa8;margin-top:14px}
+.btn{margin-top:22px;padding:12px 34px;border:0;border-radius:30px;background:linear-gradient(135deg,#ff8bbf,#ffb6d5);
+color:#fff;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer;box-shadow:0 6px 18px rgba(255,150,200,.5);transition:.2s}
+.btn:hover{transform:translateY(-2px) scale(1.05)}.btn:active{transform:scale(.96)}
+.hide{display:none}
+h2{font-size:20px;color:#ff6fa8;margin-bottom:10px}
+.hint{font-size:13px;color:#b9a3b0;margin-top:14px}
+#mu{position:fixed;top:14px;right:14px;z-index:99;width:42px;height:42px;border:0;border-radius:50%;background:#fff;
+font-size:20px;cursor:pointer;box-shadow:0 4px 14px rgba(255,150,200,.4)}
+#mu.on{animation:sp 3s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+
+/* trang 2: vườn hoa */
+.bub{min-height:92px;width:90%;max-width:360px;background:#fff;border:2px solid #ffe0ec;border-radius:18px;padding:16px 18px;
+font-size:15px;line-height:1.6;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(255,180,210,.3);transition:opacity .3s}
+.garden{display:flex;gap:6px;margin-top:26px;padding-bottom:14px;border-bottom:8px solid #b8e6b0;border-radius:4px}
+.fw{border:0;background:none;font-size:46px;cursor:pointer;transform-origin:bottom;animation:sway 2.4s ease-in-out infinite}
+.fw:nth-child(2n){animation-delay:.4s}.fw:nth-child(3n){animation-delay:.9s}
+.fw.open{animation:bloom .7s ease both}
+@keyframes sway{50%{transform:rotate(6deg)}}
+@keyframes bloom{0%{transform:scale(.5)}60%{transform:scale(1.35) rotate(-8deg)}100%{transform:scale(1.1)}}
+.cnt{margin-top:12px;font-size:13px;color:#ff9ec5}
+.mini{position:absolute!important;bottom:10px;left:10px;width:70px;animation:fy 3s ease-in-out infinite}
+
+/* trang 3: thư */
+.env{position:relative;width:250px;height:165px;background:#ffc2da;border-radius:10px;cursor:pointer;
+box-shadow:0 10px 26px rgba(255,150,200,.45);animation:bn 2s ease-in-out infinite;transition:transform .6s,opacity .6s}
+.env:before{content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,transparent 50%,#ffb0cf 50%) left/50% 100% no-repeat,linear-gradient(225deg,transparent 50%,#ffb0cf 50%) right/50% 100% no-repeat}
+.flap{position:absolute;top:0;left:0;border-left:125px solid transparent;border-right:125px solid transparent;border-top:90px solid #ff9fc4;
+transform-origin:top;transition:transform .6s}
+.env.open .flap{transform:rotateX(180deg)}
+.env i{position:absolute;top:62px;left:108px;font-size:34px;font-style:normal;z-index:3}
+.env.gone{transform:translateY(60px) scale(.6);opacity:0;pointer-events:none;position:absolute}
+.letter{display:none;width:92%;max-width:380px;max-height:68vh;overflow:auto;background:#fffdf5;border:2px solid #ffe0ec;border-radius:16px;
+padding:22px;text-align:left;font-size:15px;line-height:1.85;box-shadow:0 10px 30px rgba(255,180,210,.4);animation:up .6s both;white-space:pre-line}
+.letter.on{display:block}.letter b{display:block;text-align:right;margin-top:10px;color:#ff6fa8}
+
+/* trang 4: thẻ cào */
+.sc{position:relative;width:280px;height:170px;border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(255,150,200,.45)}
+.prize{position:absolute;inset:0;background:linear-gradient(135deg,#fff5d6,#ffe0ec);border:3px dashed #ff9ec5;border-radius:16px;
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px}
+.prize em{font-size:38px;font-style:normal}.prize b{color:#ff6fa8;font-size:17px}.prize span{font-size:13px;line-height:1.5}
+#cv{position:absolute;inset:0;touch-action:none;cursor:grab;transition:opacity .8s}
+.fin{display:none;margin-top:18px;max-width:340px;font-size:15px;line-height:1.7;animation:up .8s both}.fin.on{display:block}
+.pt{position:fixed;top:-40px;z-index:50;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(360deg)}}
